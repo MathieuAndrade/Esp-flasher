@@ -20,10 +20,10 @@ This app allow beginner user to flash firmware and image on esp devices without 
 
 - [ ] Allow users to choose what esp devices to flash and adapt the flash address
 - [ ] Allow users to set manually flash address and other params like baudrate
-- [ ] Allow users to choose what file to flash
+- [x] Allow users to choose what file to flash
 - [ ] ~~Download Esptool automatically at startup~~ (switched to [espflash](https://github.com/esp-rs/espflash))
 - [x] Convert command to build linux and OSX version (only for Windows for the moment)
-- [ ] Create Github Action to build and deploy software automatically
+- [x] Create Github Action to build and deploy software automatically
 - [ ] Maybe allowing Arduino boards and not only esp ? (if a tool like esptool exist for arduino boards)
 - [ ] Maybe allowing devloppers to create a config file that imported by users ?
 - [ ] Maybe a advanced mode ?
