@@ -33,6 +33,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          tauriScript: action:pack
           tagName: esp-flasher-v__VERSION__
           releaseName: 'Esp flasher v__VERSION__'
           releaseBody: 'See the assets to download this version and install.'
