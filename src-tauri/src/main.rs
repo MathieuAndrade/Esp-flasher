@@ -1,10 +1,9 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use serialport;
 use tauri::api::dialog::FileDialogBuilder;
 use tauri::Window;
-
-extern crate serial_enumerate;
 
 pub mod progress;
 
@@ -13,7 +12,15 @@ use flasher::flash;
 
 #[tauri::command]
 fn list_ports() -> Vec<String> {
-    serial_enumerate::enumerate_serial_ports().unwrap()
+    let mut ports = Vec::new();
+    serialport::available_ports()
+        .expect("No ports found!")
+        .iter()
+        .for_each(|port| {
+            ports.push(port.port_name.clone());
+        });
+
+    ports
 }
 
 #[tauri::command]
