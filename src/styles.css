@@ -5,9 +5,7 @@
 html,
 body,
 #app {
+  background: transparent;
   height: 100%;
-}
-
-button {
-  height: 43px;
+  border-radius: 0.5rem;
 }
