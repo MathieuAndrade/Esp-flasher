@@ -25,7 +25,8 @@
         "all": false,
         "close": true,
         "minimize": true,
-        "startDragging": true
+        "startDragging": true,
+        "setSize": true
       }
     },
     "bundle": {
@@ -49,7 +50,7 @@
         "resizable": false,
         "title": "Esp Flasher",
         "width": 400,
-        "height": 600,
+        "height": 530,
         "decorations": false,
         "transparent": true
       }
