@@ -63,36 +63,40 @@
   };
 </script>
 
-<div class="p-5 flex-grow flex flex-col gap-4">
-  <Label class="block space-y-2">
-    <span>File</span>
-    <Button
-      btnClass="flex flex-col justify-center items-center bg-gray-50 w-full rounded-lg border border-gray-300 cursor-pointer"
-      on:click={openDialog}
-    >
-      <p class="my-2 text-sm text-gray-500 cursor-pointer">
-        {#if selectedFilename === ""}
-          <span class="font-semibold">Click to upload</span> or drag and drop
-        {:else}
-          <span class="text-blue-700">{selectedFilename}</span>
-        {/if}
-      </p>
-    </Button>
-  </Label>
+<div class="p-5 flex flex-col gap-3">
+  <div class="flex gap-3">
+    <Label class="block space-y-2 flex-grow">
+      <span>File</span>
+      <Button
+        btnClass="flex flex-col justify-center items-center bg-gray-50 w-full rounded-lg border border-gray-300 cursor-pointer"
+        on:click={openDialog}
+      >
+        <p class="my-2 text-sm text-gray-500 cursor-pointer">
+          {#if selectedFilename === ""}
+            <span class="font-semibold">Click</span> or drag and drop
+          {:else}
+            <span class="text-blue-700">{selectedFilename}</span>
+          {/if}
+        </p>
+      </Button>
+    </Label>
 
-  <Label class="block space-y-2">
-    <span>Com port</span>
-    <Select
-      defaultClass="text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 mt-2 cursor-pointer"
-      items={availablePorts}
-      bind:value={selectedPort}
-    />
-  </Label>
+    <Label class="block space-y-2">
+      <span>Com port</span>
+      <Select
+        class="cursor-pointer"
+        size="sm"
+        items={availablePorts}
+        bind:value={selectedPort}
+      />
+    </Label>
+  </div>
 
   <Label class="block space-y-2">
     <span>Device type</span>
     <Select
-      defaultClass="text-gray-900 bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 mt-2 cursor-pointer"
+      class="cursor-pointer"
+      size="sm"
       items={[{ value: "8266", name: "Esp 8266" }]}
       bind:value={selectedDeviceType}
     />
@@ -107,7 +111,6 @@
         <Radio
           name="flash-type"
           class="p-2"
-          color="blue"
           value="firmware"
           bind:group={flashType}
         >
@@ -118,7 +121,6 @@
         <Radio
           name="flash-type"
           class="p-2"
-          color="blue"
           value="filesystem"
           bind:group={flashType}
         >
