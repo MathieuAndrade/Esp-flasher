@@ -8,10 +8,10 @@ use espflash::cli::{config::Config, connect, ConnectArgs};
 
 use crate::progress::Progress;
 
-pub fn flash(window: Window, port: String, addr: u32, bin_file: String) {
+pub fn flash(window: Window, port: String, addr: u32, baud: u32, bin_file: String) {
     let args = ConnectArgs {
         port: Some(port),
-        baud: Some(512000),
+        baud: Some(baud),
         no_stub: false,
     };
 

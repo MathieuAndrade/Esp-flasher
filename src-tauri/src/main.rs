@@ -41,13 +41,13 @@ fn open_file_dialog(window: Window) {
 #[tauri::command]
 fn flash_firmware(window: Window, port: String, file: String) {
     println!("Flashing firmware on port: {}", port);
-    flash(window, port, 0x0, file);
+    flash(window, port, 0x0, 921600, file);
 }
 
 #[tauri::command]
 fn flash_image(window: Window, port: String, file: String) {
     println!("Flashing image on port: {}", port);
-    flash(window, port, 3145728, file);
+    flash(window, port, 3145728, 921600, file);
 }
 
 fn main() {
