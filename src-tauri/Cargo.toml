@@ -1,6 +1,6 @@
 [package]
 name = "esp-flasher"
-version = "0.0.1"
+version = "1.0.0"
 description = "An app to flash firmware on esp devices"
 authors = ["mathieu andrade"]
 license = ""
