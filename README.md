@@ -36,15 +36,12 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#how-to-use">Installation</a></li>
+        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#download">Download</a></li>
@@ -68,7 +65,7 @@
 </div>
 </br>
 
-There are many methods to upload firmware to esp devices, but every developer has at least once encountered a frustrated user who tried to use their program and failed it. Why ? The response are very simple, because user has not installed all necessary libraries or he has not configured his IDE correctly. And for this user, the fault lies to the developer.
+There are many methods to upload firmware to esp devices, but every developer has at least once encountered a frustrated user who tried to use their program and failed it. Why ? The response is very simple, because user has not installed all necessary libraries or he has installed bad version of libraries or he has not configured his IDE correctly. And for this user, the fault lies to the developer.
 
 This case is all the more present when the project is destined to be distributed in an open source way.
 
@@ -81,23 +78,16 @@ So this is goals of this project to solve this problem:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Built With
-
-- [![Svelte][Svelte.dev]][Svelte-url]
-- [![Tauri][Tauri.dev]][Tauri-url]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- GETTING STARTED -->
 
 ## Getting Started
 
-## Prerequisites
+### Prerequisites
 
 This app required [Rust](https://www.rust-lang.org/fr/tools/install) and [Yarn](https://classic.yarnpkg.com/lang/en/docs/install) installation. Keep in mind that this section is only needed for developing purpose.
 **If you are simple user, you not required to do any of this, instead go to <a href="#download">download</a> section.**
 
-## How to use
+### Installation
 
 1. Clone the repo
    ```sh
@@ -134,7 +124,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Download
 
-You can [download](https://github.com/MathieuAndrade/Esp-flasher/releases) the latest installable version of Markdownify for Windows, macOS and Linux.
+You can [download](https://github.com/MathieuAndrade/Esp-flasher/releases) the latest installable version of Esp-Flasher for Windows, macOS and Linux.
 
 <!-- ROADMAP -->
 
