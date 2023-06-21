@@ -4,10 +4,10 @@
     <a href="https://github.com/MathieuAndrade/Esp-flasher/network/members" alt="Forks">
       <img src="https://img.shields.io/github/forks/MathieuAndrade/Esp-flasher?style=for-the-badge" />
     </a>
-    <a href="https://github.com/MathieuAndrade/Esp-flasher/network/stargazers" alt="Stargazers">
+    <a href="https://github.com/MathieuAndrade/Esp-flasher/stargazers" alt="Stargazers">
       <img src="https://img.shields.io/github/stars/MathieuAndrade/Esp-flasher?style=for-the-badge" />
     </a>
-    <a href="https://github.com/badges/shields/graphs/contributors" alt="Contributors">
+    <a href="https://github.com/MathieuAndrade/Esp-flasher/contributors" alt="Contributors">
       <img src="https://img.shields.io/github/contributors/MathieuAndrade/Esp-flasher?style=for-the-badge" />
     </a>
 </p>
