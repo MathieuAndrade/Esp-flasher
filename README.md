@@ -133,6 +133,7 @@ You can [download](https://github.com/MathieuAndrade/Esp-flasher/releases) the l
 - [ ] Allow Arduino boards
 - [ ] Allow developers to create a configuration file imported by users
 - [ ] Multi-language Support
+- [ ] Make a portable version for Windows platform ([check this issue](https://github.com/tauri-apps/tauri-action/issues/302))
 
 See the [open issues](https://github.com/MathieuAndrade/Esp-flasher/issues) for a full list of proposed features (and known issues).
 
