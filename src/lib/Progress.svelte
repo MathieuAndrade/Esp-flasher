@@ -1,30 +1,28 @@
 <script lang="ts">
   import { listen } from "@tauri-apps/api/event";
   import { onMount } from "svelte";
+  import { isFlashing } from "../utils/store";
 
   const circleSize = 30 * 2 * Math.PI;
 
-  let isFlashing = false;
   let flashProgress = 0;
 
   onMount(async () => {
     listen("flash_started", () => {
-      isFlashing = true;
+      isFlashing.set(true);
     });
     listen("flash_progress_update", (e) => {
       let payload = e.payload as { msg: string };
       flashProgress = Number(payload.msg);
     });
     listen("flash_finished", () => {
-      isFlashing = false;
+      isFlashing.set(false);
     });
   });
 </script>
 
-{#if isFlashing}
-  <div
-    class="fixed flex flex-col items-center justify-center w-full h-full bg-gray-200/60 rounded-lg"
-  >
+{#if $isFlashing}
+  <div class="fixed flex flex-col items-center justify-center w-full h-full">
     <div class="inline-flex items-center justify-center">
       <!-- Building a Progress Ring: https://css-tricks.com/building-progress-ring-quickly/ -->
       <svg class="w-20 h-20">

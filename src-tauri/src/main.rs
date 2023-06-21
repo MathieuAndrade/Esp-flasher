@@ -9,7 +9,6 @@ use tauri::{LogicalSize, Size, Window};
 pub mod progress;
 
 mod flasher;
-use flasher::flash;
 
 #[tauri::command]
 fn list_ports() -> Vec<String> {
@@ -40,15 +39,9 @@ fn open_file_dialog(window: Window) {
 }
 
 #[tauri::command]
-fn flash_firmware(window: Window, port: String, file: String) {
-    println!("Flashing firmware on port: {}", port);
-    flash(window, port, 0x0, 921600, file);
-}
-
-#[tauri::command]
-fn flash_image(window: Window, port: String, file: String) {
+fn flash(window: Window, port: String, file: String, baud_rate: u32, flash_address: u32) {
     println!("Flashing image on port: {}", port);
-    flash(window, port, 3145728, 921600, file);
+    flasher::flash(window, port, baud_rate, flash_address, file);
 }
 
 #[tauri::command]
@@ -112,8 +105,7 @@ fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             list_ports,
-            flash_firmware,
-            flash_image,
+            flash,
             open_file_dialog,
             set_window_size
         ])
