@@ -3,12 +3,11 @@
   import { invoke } from "@tauri-apps/api/tauri";
   import { Button, Label, Radio, Select } from "flowbite-svelte";
   import { onMount } from "svelte";
+  import { port, file, deviceType } from "../utils/store";
 
   let availablePorts: Array<{ value: string; name: string }> = [];
-  let selectedPort: string = "";
-  let selectedDeviceType: string = "8266";
-  let selectedFilename = "";
-  let selectedFilePath = "";
+  let filename = "";
+
   let flashType = "firmware";
 
   const openDialog = () => invoke("open_file_dialog");
@@ -16,51 +15,26 @@
   onMount(async () => {
     let ports: string[] = await invoke("list_ports");
     availablePorts = ports.map((port) => ({ value: port, name: port }));
-    selectedPort = availablePorts[0].value;
+    port.set(availablePorts[0].value);
 
     listen("tauri://file-drop", (e) => {
-      selectedFilePath = e.payload[0];
-      selectedFilename = selectedFilePath.replace(/^.*[\\\/]/, "");
+      console.log(e.payload);
+      file.set(e.payload[0]);
+      filename = e.payload[0].replace(/^.*[\\\/]/, "");
     });
 
     listen("file_selected", (e) => {
-      selectedFilePath = e.payload as string;
-      selectedFilename = selectedFilePath.replace(/^.*[\\\/]/, "");
+      file.set(e.payload as string);
+      console.log(e.payload);
+      filename = $file.replace(/^.*[\\\/]/, "");
     });
 
     // Reset the form when flashing is finished
     listen("flash_finished", () => {
-      selectedPort = availablePorts[0].value;
-      selectedFilename = "";
-      selectedFilePath = "";
+      port.set(availablePorts[0].value);
+      file.set("");
     });
   });
-
-  function flashFirmware() {
-    invoke("flash_firmware", {
-      port: selectedPort,
-      file: selectedFilePath,
-    });
-  }
-
-  function flashImage() {
-    invoke("flash_image", {
-      port: selectedPort,
-      file: selectedFilePath,
-    });
-  }
-
-  export const flash = () => {
-    console.log("flashType", flashType);
-    console.log("selectedPort", selectedPort);
-    console.log("selectedDeviceType", selectedDeviceType);
-
-    if (flashType === "firmware") {
-      flashFirmware();
-    } else {
-      flashImage();
-    }
-  };
 </script>
 
 <div class="p-5 flex flex-col gap-3">
@@ -72,10 +46,10 @@
         on:click={openDialog}
       >
         <p class="my-2 text-sm text-gray-500 cursor-pointer">
-          {#if selectedFilename === ""}
+          {#if $file === ""}
             <span class="font-semibold">Click</span> or drag and drop
           {:else}
-            <span class="text-blue-700">{selectedFilename}</span>
+            <span class="text-blue-700">{filename}</span>
           {/if}
         </p>
       </Button>
@@ -87,7 +61,7 @@
         class="cursor-pointer"
         size="sm"
         items={availablePorts}
-        bind:value={selectedPort}
+        bind:value={$port}
       />
     </Label>
   </div>
@@ -98,7 +72,7 @@
       class="cursor-pointer"
       size="sm"
       items={[{ value: "8266", name: "Esp 8266" }]}
-      bind:value={selectedDeviceType}
+      bind:value={$deviceType}
     />
   </Label>
 

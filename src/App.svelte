@@ -7,20 +7,38 @@
   import Progress from "./lib/Progress.svelte";
   import Titlebar from "./lib/Titlebar.svelte";
 
-  let flash;
+  import { port, file, baudrate, flashAddress } from "./utils/store";
+
+  export const flash = () => {
+    console.log("flash", $port, $file, $baudrate, $flashAddress);
+
+    /*
+    invoke("flash", {
+      port: $port,
+      file: $file,
+      baudrate: $baudrate,
+      flashAddress: $flashAddress,
+    });
+    */
+  };
 </script>
 
 <main class="flex flex-col h-full bg-gray-200 rounded-lg overflow-hidden">
   <Titlebar />
 
-  <Options bind:flash />
+  <Options />
 
   <Accordion flush class="flex-grow">
     <AdvancedOptions />
   </Accordion>
 
   <div class="p-5 text-end">
-    <Button pill={true} class="!px-2 h-[46px] w-[46px]" on:click={flash}>
+    <Button
+      pill={true}
+      class="!px-2 h-[46px] w-[46px]"
+      on:click={flash}
+      disabled={$file === ""}
+    >
       Start
     </Button>
   </div>

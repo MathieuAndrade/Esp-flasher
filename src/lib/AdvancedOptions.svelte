@@ -2,9 +2,9 @@
   import { invoke } from "@tauri-apps/api/tauri";
   import { AccordionItem, Input, Label, Select } from "flowbite-svelte";
   import { afterUpdate } from "svelte";
+  import { baudrate, flashAddress } from "../utils/store";
 
-  let selectedBaudrate = "921600";
-  let optionsOpen = true;
+  let optionsOpen = false;
 
   afterUpdate(() => {
     const button = document.querySelector("h2 button");
@@ -16,7 +16,7 @@
         // Resize the window to fit the options
         invoke("set_window_size", {
           targetWidth: 400,
-          targetHeight: optionsOpen ? 680 : 530,
+          targetHeight: optionsOpen ? 595 : 505,
           operationCount: 8,
         });
       });
@@ -27,7 +27,6 @@
 <AccordionItem
   defaultClass="w-[-webkit-fill-available] flex items-center justify-between font-medium text-left border-b border-gray-400/70"
   paddingFlush="mx-5 py-2"
-  open
 >
   <span slot="header"> Advanced options </span>
 
@@ -64,12 +63,18 @@
           { value: "256000", name: "256000" },
           { value: "512000", name: "512000" },
         ]}
-        bind:value={selectedBaudrate}
+        bind:value={$baudrate}
       />
     </Label>
     <div>
       <Label for="flashAddress" class="mb-2">Flash Address</Label>
-      <Input type="text" id="flashAddress" placeholder="0x0" class="h-[38px]" />
+      <Input
+        type="text"
+        id="flashAddress"
+        placeholder="0x0"
+        class="h-[38px]"
+        bind:value={$flashAddress}
+      />
     </div>
   </div>
 </AccordionItem>
