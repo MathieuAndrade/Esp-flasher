@@ -3,12 +3,12 @@
   import { invoke } from "@tauri-apps/api/tauri";
   import { Button, Label, Radio, Select } from "flowbite-svelte";
   import { onMount } from "svelte";
-  import { port, file, deviceType } from "../utils/store";
+  import devices from "../utils/devices";
+  import { deviceType, file, port, flashType } from "../utils/store";
 
   let availablePorts: Array<{ value: string; name: string }> = [];
+  let availableDevices: Array<{ value: string; name: string }> = [];
   let filename = "";
-
-  let flashType = "firmware";
 
   const openDialog = () => invoke("open_file_dialog");
 
@@ -16,6 +16,11 @@
     let ports: string[] = await invoke("list_ports");
     availablePorts = ports.map((port) => ({ value: port, name: port }));
     port.set(availablePorts[0].value);
+
+    availableDevices = Object.keys(devices).map((key) => ({
+      value: key,
+      name: devices[key].name,
+    }));
 
     listen("tauri://file-drop", (e) => {
       console.log(e.payload);
@@ -71,7 +76,7 @@
     <Select
       class="cursor-pointer"
       size="sm"
-      items={[{ value: "8266", name: "Esp 8266" }]}
+      items={availableDevices}
       bind:value={$deviceType}
     />
   </Label>
@@ -86,7 +91,7 @@
           name="flash-type"
           class="p-2"
           value="firmware"
-          bind:group={flashType}
+          bind:group={$flashType}
         >
           Firmware
         </Radio>
@@ -96,7 +101,7 @@
           name="flash-type"
           class="p-2"
           value="filesystem"
-          bind:group={flashType}
+          bind:group={$flashType}
         >
           Filesystem
         </Radio>

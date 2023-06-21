@@ -2,9 +2,25 @@
   import { invoke } from "@tauri-apps/api/tauri";
   import { AccordionItem, Input, Label, Select } from "flowbite-svelte";
   import { afterUpdate } from "svelte";
-  import { baudrate, flashAddress } from "../utils/store";
+
+  import devices from "../utils/devices";
+
+  import {
+    baudrate,
+    flashAddress,
+    deviceType,
+    flashType,
+  } from "../utils/store";
 
   let optionsOpen = false;
+
+  $: {
+    if ($flashType === "firmware") {
+      flashAddress.set(devices[$deviceType].firmwareFlashAddress);
+    } else {
+      flashAddress.set(devices[$deviceType].imageFlashAddress);
+    }
+  }
 
   afterUpdate(() => {
     const button = document.querySelector("h2 button");
